@@ -62,6 +62,17 @@ func (c *Controller) SetLoad(ctx context.Context, deviceID string, load int32) e
 	return nil
 }
 
+func (c *Controller) Recalibrate(ctx context.Context, deviceID string) error {
+	trainer, ok := c.trainers[deviceID]
+	if !ok {
+		return fmt.Errorf("trainer not found: %s", deviceID)
+	}
+
+	trainer.Recalibrate(ctx)
+
+	return nil
+}
+
 func (c *Controller) Close() error {
 	var result error
 	for k, v := range c.trainers {

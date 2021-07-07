@@ -9,6 +9,8 @@ import (
 	"github.com/mctofu/sport-grpc/sport"
 )
 
+var _ sportgrpc.ControllerServer = (*Server)(nil)
+
 type Server struct {
 	controller *sport.Controller
 	doneChan   <-chan struct{}
@@ -48,4 +50,11 @@ func (s *Server) SetLoad(ctx context.Context, req *sportgrpc.LoadRequest) (*spor
 		return nil, err
 	}
 	return &sportgrpc.LoadResponse{}, nil
+}
+
+func (s *Server) Recalibrate(ctx context.Context, req *sportgrpc.RecalibrateRequest) (*sportgrpc.RecalibrateResponse, error) {
+	if err := s.controller.Recalibrate(ctx, req.DeviceId); err != nil {
+		return nil, err
+	}
+	return &sportgrpc.RecalibrateResponse{}, nil
 }
