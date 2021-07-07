@@ -4,7 +4,7 @@ go 1.14
 
 require (
 	github.com/golang/protobuf v1.4.2
-	github.com/hashicorp/go-multierror v1.1.0
+	github.com/hashicorp/go-multierror v1.1.1
 	github.com/mctofu/computrainer v0.0.0-20200719062840-ddbeb2594664
 	go.bug.st/serial v1.1.0
 	google.golang.org/grpc v1.29.1
