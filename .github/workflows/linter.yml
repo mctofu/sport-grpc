@@ -29,6 +29,8 @@ jobs:
     name: Lint Code Base
     # Set the agent to run on
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     ##################
     # Load all steps #
