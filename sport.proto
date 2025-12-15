@@ -38,7 +38,8 @@ message SportData {
 }
 
 enum Button {
-  BUTTON_RESET = 0;  // protolint:disable:this ENUM_FIELD_NAMES_PREFIX
+  // protolint:disable:next ENUM_FIELD_NAMES_ZERO_VALUE_END_WITH
+  BUTTON_RESET = 0;
   BUTTON_F1 = 1;
   BUTTON_F2 = 2;
   BUTTON_F3 = 3;
@@ -47,11 +48,13 @@ enum Button {
 }
 
 message ControlData {
-  repeated Button pressed = 1;  // protolint:disable:this REPEATED_FIELD_NAMES_PLURALIZED
+  // protolint:disable:next REPEATED_FIELD_NAMES_PLURALIZED
+  repeated Button pressed = 1;
 }
 
 enum PerformanceType {
-  PERFORMANCE_TYPE_SPEED = 0;  // protolint:disable:this ENUM_FIELD_NAMES_PREFIX
+  // protolint:disable:next ENUM_FIELD_NAMES_ZERO_VALUE_END_WITH
+  PERFORMANCE_TYPE_SPEED = 0;
   PERFORMANCE_TYPE_POWER = 1;
   PERFORMANCE_TYPE_CADENCE = 2;
   PERFORMANCE_TYPE_HEART_RATE = 3;

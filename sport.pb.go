@@ -24,7 +24,8 @@ const (
 type Button int32
 
 const (
-	Button_BUTTON_RESET Button = 0 // protolint:disable:this ENUM_FIELD_NAMES_PREFIX
+	// protolint:disable:next ENUM_FIELD_NAMES_ZERO_VALUE_END_WITH
+	Button_BUTTON_RESET Button = 0
 	Button_BUTTON_F1    Button = 1
 	Button_BUTTON_F2    Button = 2
 	Button_BUTTON_F3    Button = 3
@@ -82,7 +83,8 @@ func (Button) EnumDescriptor() ([]byte, []int) {
 type PerformanceType int32
 
 const (
-	PerformanceType_PERFORMANCE_TYPE_SPEED       PerformanceType = 0 // protolint:disable:this ENUM_FIELD_NAMES_PREFIX
+	// protolint:disable:next ENUM_FIELD_NAMES_ZERO_VALUE_END_WITH
+	PerformanceType_PERFORMANCE_TYPE_SPEED       PerformanceType = 0
 	PerformanceType_PERFORMANCE_TYPE_POWER       PerformanceType = 1
 	PerformanceType_PERFORMANCE_TYPE_CADENCE     PerformanceType = 2
 	PerformanceType_PERFORMANCE_TYPE_HEART_RATE  PerformanceType = 3
@@ -399,8 +401,9 @@ func (x *SportData) GetPerformanceData() *PerformanceData {
 }
 
 type ControlData struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Pressed       []Button               `protobuf:"varint,1,rep,packed,name=pressed,proto3,enum=sportgrpc.Button" json:"pressed,omitempty"` // protolint:disable:this REPEATED_FIELD_NAMES_PLURALIZED
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// protolint:disable:next REPEATED_FIELD_NAMES_PLURALIZED
+	Pressed       []Button `protobuf:"varint,1,rep,packed,name=pressed,proto3,enum=sportgrpc.Button" json:"pressed,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
