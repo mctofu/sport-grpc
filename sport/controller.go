@@ -2,9 +2,9 @@ package sport
 
 import (
 	"context"
+	"errors"
 	"fmt"
 
-	"github.com/hashicorp/go-multierror"
 	"github.com/mctofu/computrainer"
 	sportgrpc "github.com/mctofu/sport-grpc"
 )
@@ -74,11 +74,11 @@ func (c *Controller) Recalibrate(ctx context.Context, deviceID string) error {
 }
 
 func (c *Controller) Close() error {
-	var result error
+	var results []error
 	for k, v := range c.trainers {
 		if err := v.Close(); err != nil {
-			result = multierror.Append(result, fmt.Errorf("%s: %v", k, err))
+			results = append(results, fmt.Errorf("%s: %w", k, err))
 		}
 	}
-	return result
+	return errors.Join(results...)
 }
