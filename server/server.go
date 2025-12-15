@@ -12,6 +12,7 @@ import (
 var _ sportgrpc.ControllerServer = (*Server)(nil)
 
 type Server struct {
+	sportgrpc.UnimplementedControllerServer
 	controller *sport.Controller
 	doneChan   <-chan struct{}
 }

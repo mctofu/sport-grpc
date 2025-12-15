@@ -2,10 +2,12 @@ syntax = "proto3";
 
 package sportgrpc;
 
+option go_package = "./sportgrpc";
+
 service Controller {
-    rpc ReadData(DataRequest) returns (stream SportData) {}
-    rpc SetLoad(LoadRequest) returns (LoadResponse) {}
-    rpc Recalibrate(RecalibrateRequest) returns (RecalibrateResponse) {}
+  rpc ReadData(DataRequest) returns (stream SportData) {}
+  rpc SetLoad(LoadRequest) returns (LoadResponse) {}
+  rpc Recalibrate(RecalibrateRequest) returns (RecalibrateResponse) {}
 }
 
 message DataRequest {
@@ -13,8 +15,8 @@ message DataRequest {
 }
 
 message LoadRequest {
-    string device_id = 1;
-    int32 target_load = 2;
+  string device_id = 1;
+  int32 target_load = 2;
 }
 
 message LoadResponse {
@@ -22,7 +24,7 @@ message LoadResponse {
 }
 
 message RecalibrateRequest {
-    string device_id = 1;
+  string device_id = 1;
 }
 
 message RecalibrateResponse {
@@ -30,33 +32,36 @@ message RecalibrateResponse {
 }
 
 message SportData {
-    string device_id = 1;
-    ControlData control_data = 2;
-    PerformanceData performance_data = 3;
+  string device_id = 1;
+  ControlData control_data = 2;
+  PerformanceData performance_data = 3;
 }
 
 enum Button {
-    BUTTON_RESET = 0;
-    BUTTON_F1 = 1;
-    BUTTON_F2 = 2;
-    BUTTON_F3 = 3;
-    BUTTON_PLUS = 4;
-    BUTTON_MINUS = 5;
+  // protolint:disable:next ENUM_FIELD_NAMES_ZERO_VALUE_END_WITH
+  BUTTON_RESET = 0;
+  BUTTON_F1 = 1;
+  BUTTON_F2 = 2;
+  BUTTON_F3 = 3;
+  BUTTON_PLUS = 4;
+  BUTTON_MINUS = 5;
 }
 
 message ControlData {
-    repeated Button pressed = 1;
+  // protolint:disable:next REPEATED_FIELD_NAMES_PLURALIZED
+  repeated Button pressed = 1;
 }
 
 enum PerformanceType {
-    PERFORMANCE_TYPE_SPEED = 0;
-    PERFORMANCE_TYPE_POWER = 1;
-    PERFORMANCE_TYPE_CADENCE = 2;
-    PERFORMANCE_TYPE_HEART_RATE = 3;
-    PERFORMANCE_TYPE_CALIBRATION = 4;
+  // protolint:disable:next ENUM_FIELD_NAMES_ZERO_VALUE_END_WITH
+  PERFORMANCE_TYPE_SPEED = 0;
+  PERFORMANCE_TYPE_POWER = 1;
+  PERFORMANCE_TYPE_CADENCE = 2;
+  PERFORMANCE_TYPE_HEART_RATE = 3;
+  PERFORMANCE_TYPE_CALIBRATION = 4;
 }
 
 message PerformanceData {
-    PerformanceType type = 1;
-    double value = 2;
+  PerformanceType type = 1;
+  double value = 2;
 }
