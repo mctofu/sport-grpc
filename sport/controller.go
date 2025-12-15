@@ -25,7 +25,7 @@ func (c *Controller) Reader() <-chan *sportgrpc.SportData {
 	return c.outputChan
 }
 
-func (c *Controller) AddComputrainer(ctx context.Context, port string) error {
+func (c *Controller) AddComputrainer(_ context.Context, port string) error {
 	ct := &computrainer.Controller{}
 
 	conn, err := ct.Start(port)
@@ -51,7 +51,7 @@ func (c *Controller) AddComputrainer(ctx context.Context, port string) error {
 	return nil
 }
 
-func (c *Controller) SetLoad(ctx context.Context, deviceID string, load int32) error {
+func (c *Controller) SetLoad(_ context.Context, deviceID string, load int32) error {
 	trainer, ok := c.trainers[deviceID]
 	if !ok {
 		return fmt.Errorf("trainer not found: %s", deviceID)

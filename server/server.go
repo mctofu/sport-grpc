@@ -23,7 +23,7 @@ func NewServer(ctlr *sport.Controller, doneChan <-chan struct{}) *Server {
 	}
 }
 
-func (s *Server) ReadData(req *sportgrpc.DataRequest, ds sportgrpc.Controller_ReadDataServer) error {
+func (s *Server) ReadData(_ *sportgrpc.DataRequest, ds sportgrpc.Controller_ReadDataServer) error {
 	ctx := ds.Context()
 
 	log.Println("Client connected")
