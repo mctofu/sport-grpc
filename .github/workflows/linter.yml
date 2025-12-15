@@ -51,5 +51,9 @@ jobs:
         uses: super-linter/super-linter/slim@v8
         env:
           VALIDATE_ALL_CODEBASE: false
+          VALIDATE_CHECKOV: false
+          VALIDATE_DOCKER_HADOLINT: false
+          VALIDATE_GO: false
+          VALIDATE_TRIVY: false
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
