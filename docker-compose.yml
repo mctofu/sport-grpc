@@ -2,4 +2,4 @@ services:
   protoc:
     build: .
     volumes:
-    - .:/sportgrpc
+      - .:/sportgrpc
