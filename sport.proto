@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package sportgrpc;
 
+option go_package = "./sportgrpc";
+
 service Controller {
     rpc ReadData(DataRequest) returns (stream SportData) {}
     rpc SetLoad(LoadRequest) returns (LoadResponse) {}
