@@ -48,19 +48,20 @@ func run() error {
 
 	ctlr := sport.NewController()
 	defer func() {
-		if err := ctlr.Close(); err != nil {
-			log.Printf("Controller cleanup error: %v", err)
+		if closeErr := ctlr.Close(); closeErr != nil {
+			log.Printf("Controller cleanup error: %v", closeErr)
 		}
 	}()
 	if computrainerPort != nil {
-		if err := ctlr.AddComputrainer(ctx, *computrainerPort); err != nil {
+		if err = ctlr.AddComputrainer(ctx, *computrainerPort); err != nil {
 			return fmt.Errorf("addComputrainer: %v", err)
 		}
 	}
 
-	stop := make(chan os.Signal)
+	stop := make(chan os.Signal, 1)
 	signal.Notify(stop, syscall.SIGTERM, syscall.SIGINT)
 
+	//nolint:gosec // G102: Bind to all interfaces is intentional for server
 	lis, err := net.Listen("tcp", ":8080")
 	if err != nil {
 		return fmt.Errorf("failed to listen: %v", err)

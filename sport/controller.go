@@ -2,9 +2,9 @@ package sport
 
 import (
 	"context"
+	"errors"
 	"fmt"
 
-	"github.com/hashicorp/go-multierror"
 	"github.com/mctofu/computrainer"
 	sportgrpc "github.com/mctofu/sport-grpc"
 )
@@ -25,12 +25,12 @@ func (c *Controller) Reader() <-chan *sportgrpc.SportData {
 	return c.outputChan
 }
 
-func (c *Controller) AddComputrainer(ctx context.Context, port string) error {
+func (c *Controller) AddComputrainer(_ context.Context, port string) error {
 	ct := &computrainer.Controller{}
 
 	conn, err := ct.Start(port)
 	if err != nil {
-		return fmt.Errorf("computrainer start: %v\n", err)
+		return fmt.Errorf("computrainer start: %v", err)
 	}
 
 	deviceID := "default"
@@ -51,7 +51,7 @@ func (c *Controller) AddComputrainer(ctx context.Context, port string) error {
 	return nil
 }
 
-func (c *Controller) SetLoad(ctx context.Context, deviceID string, load int32) error {
+func (c *Controller) SetLoad(_ context.Context, deviceID string, load int32) error {
 	trainer, ok := c.trainers[deviceID]
 	if !ok {
 		return fmt.Errorf("trainer not found: %s", deviceID)
@@ -74,11 +74,11 @@ func (c *Controller) Recalibrate(ctx context.Context, deviceID string) error {
 }
 
 func (c *Controller) Close() error {
-	var result error
+	var results []error
 	for k, v := range c.trainers {
 		if err := v.Close(); err != nil {
-			result = multierror.Append(result, fmt.Errorf("%s: %v", k, err))
+			results = append(results, fmt.Errorf("%s: %w", k, err))
 		}
 	}
-	return result
+	return errors.Join(results...)
 }
