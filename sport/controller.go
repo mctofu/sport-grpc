@@ -30,7 +30,7 @@ func (c *Controller) AddComputrainer(ctx context.Context, port string) error {
 
 	conn, err := ct.Start(port)
 	if err != nil {
-		return fmt.Errorf("computrainer start: %v\n", err)
+		return fmt.Errorf("computrainer start: %v", err)
 	}
 
 	deviceID := "default"

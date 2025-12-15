@@ -58,7 +58,7 @@ func run() error {
 		}
 	}
 
-	stop := make(chan os.Signal)
+	stop := make(chan os.Signal, 1)
 	signal.Notify(stop, syscall.SIGTERM, syscall.SIGINT)
 
 	lis, err := net.Listen("tcp", ":8080")
